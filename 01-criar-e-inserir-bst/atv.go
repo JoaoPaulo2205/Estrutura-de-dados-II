@@ -11,17 +11,14 @@ type Arvore struct {
 	Raiz *No
 }
 
-// NovaArvore cria e retorna uma nova árvore binária de busca vazia.
 func NovaArvore() *Arvore {
 	return &Arvore{Raiz: nil}
 }
 
-// NovoNo cria e retorna um novo nó com o valor especificado.
 func NovoNo(v int) *No {
 	return &No{Valor: v}
 }
 
-// inserir insere recursivamente um valor na subárvore enraizada em node, ignorando duplicatas.
 func (node *No) inserir(v int) *No {
 	if node == nil {
 		return NovoNo(v)
@@ -31,16 +28,13 @@ func (node *No) inserir(v int) *No {
 	} else if v > node.Valor {
 		node.Direito = node.Direito.inserir(v)
 	}
-	// Se v == node.Valor, o valor duplicado é ignorado
 	return node
 }
 
-// Inserir insere um novo valor na árvore binária de busca.
 func (a *Arvore) Inserir(v int) {
 	a.Raiz = a.Raiz.inserir(v)
 }
 
-// EmOrdem percorre a subárvore em ordem simétrica (in-order: Esquerda, Raiz, Direita).
 func (node *No) EmOrdem() {
 	if node != nil {
 		node.Esquerdo.EmOrdem()
@@ -49,7 +43,6 @@ func (node *No) EmOrdem() {
 	}
 }
 
-// ImprimirEmOrdem exibe os elementos da árvore em ordem crescente.
 func (a *Arvore) ImprimirEmOrdem() {
 	if a.Raiz == nil {
 		fmt.Println("(árvore vazia)")
@@ -73,7 +66,6 @@ func main() {
 	fmt.Print("Árvore após inserções (percurso em ordem): ")
 	arvore.ImprimirEmOrdem()
 
-	// 3. Teste de inserção de valores duplicados (devem ser ignorados)
 	duplicados := []int{50, 30, 65, 80}
 	fmt.Println("\nTentando inserir valores duplicados:", duplicados)
 	for _, v := range duplicados {
